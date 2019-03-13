@@ -22,28 +22,29 @@ import java.util.List;
 /**
  * @author gaoxu
  * @date 2019/3/12/
- *  测试用户详情信息的接口
+ * 测试用户详情信息的接口
  */
 @Service
 public class UserBiz {
 
-    public  ObjectRestResponse getUserMassage(){
-        OapiUserGetuserinfoRequest request=new OapiUserGetuserinfoRequest();
+    public ObjectRestResponse getUserMassage() {
+        OapiUserGetuserinfoRequest request = new OapiUserGetuserinfoRequest();
         request.setHttpMethod("GET");
-        OapiUserGetuserinfoResponse response=ResultRespose.resultRespose(NailInterfaceAddress.ACCESS_TOKEN_FOR_USER_ID,request);
-        String userId=response.getUserid();
-        return  ObjectRestResponse.genJsonResultByOk(userId);
+        OapiUserGetuserinfoResponse response = ResultRespose.resultRespose(NailInterfaceAddress.ACCESS_TOKEN_FOR_USER_ID, request);
+        String userId = response.getUserid();
+        return ObjectRestResponse.genJsonResultByOk(userId);
     }
 
     /**
-     *  获得人员列表
+     * 获得人员列表
+     *
      * @return
      */
-    public  ObjectRestResponse getUserMassageList(){
-        OapiUserGetResponse response=null;
+    public ObjectRestResponse getUserMassageList() {
+        OapiUserGetResponse response = null;
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/get");
         OapiUserGetRequest request = new OapiUserGetRequest();
-        String  userId="manager8587";
+        String userId = "manager8587";
         // userId="1415051140937204";
         request.setUserid(userId);
         request.setHttpMethod("GET");
@@ -52,14 +53,15 @@ public class UserBiz {
         } catch (ApiException e) {
             e.printStackTrace();
         }
-        return  ObjectRestResponse.genJsonResultByOk(response);
+        return ObjectRestResponse.genJsonResultByOk(response);
     }
 
     /**
-     *  获得部门下的人员列表
+     * 获得部门下的人员列表
+     *
      * @return
      */
-    public  ObjectRestResponse getDeptMemberUserMassage(){
+    public ObjectRestResponse getDeptMemberUserMassage() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/getDeptMember");
         OapiUserGetDeptMemberRequest req = new OapiUserGetDeptMemberRequest();
         req.setDeptId("104808476");
@@ -71,25 +73,26 @@ public class UserBiz {
             e.printStackTrace();
         }
         System.out.println(rsp.getBody());
-        return  ObjectRestResponse.genJsonResultByOk(rsp);
+        return ObjectRestResponse.genJsonResultByOk(rsp);
     }
 
     /**
      * 获得部门下的用户列表，并分页显示
+     *
      * @return
      */
-    public  ObjectRestResponse getSimpleUserMassage(){
+    public ObjectRestResponse getSimpleUserMassage() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/simplelist");
         OapiUserSimplelistRequest request = new OapiUserSimplelistRequest();
         request.setDepartmentId(Long.valueOf(104808476));
         request.setOffset(0L);
         request.setSize(10L);
         request.setHttpMethod("GET");
-        OapiUserSimplelistResponse response=null;
+        OapiUserSimplelistResponse response = null;
 
         try {
             response = client.execute(request, ResultRespose.getToken());
-            System.out.println("body:"+response.getBody());
+            System.out.println("body:" + response.getBody());
         } catch (ApiException e) {
             e.printStackTrace();
         }
@@ -98,9 +101,10 @@ public class UserBiz {
 
     /**
      * 获得人员信息并分页
+     *
      * @return
      */
-    public  ObjectRestResponse getUserMassageListbyPage(){
+    public ObjectRestResponse getUserMassageListbyPage() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/listbypage");
         OapiUserListbypageRequest request = new OapiUserListbypageRequest();
         request.setDepartmentId(Long.valueOf(104808476));
@@ -108,9 +112,9 @@ public class UserBiz {
         request.setSize(10L);
         request.setOrder("entry_desc");
         request.setHttpMethod("GET");
-        OapiUserListbypageResponse response=null;
+        OapiUserListbypageResponse response = null;
         try {
-            response = client.execute(request,ResultRespose.getToken());
+            response = client.execute(request, ResultRespose.getToken());
         } catch (ApiException e) {
             e.printStackTrace();
         }
@@ -119,9 +123,10 @@ public class UserBiz {
 
     /**
      * 获得管理员信息
+     *
      * @return
      */
-    public  ObjectRestResponse getUserGetAdmin(){
+    public ObjectRestResponse getUserGetAdmin() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/get_admin");
         OapiUserGetAdminRequest request = new OapiUserGetAdminRequest();
         request.setHttpMethod("GET");
@@ -136,15 +141,16 @@ public class UserBiz {
 
     /**
      * 获取管理员通讯录权限范围
+     *
      * @return
      */
-    public  ObjectRestResponse getUserGetAdminScope(){
+    public ObjectRestResponse getUserGetAdminScope() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/user/get_admin_scope");
         OapiUserGetAdminScopeRequest req = new OapiUserGetAdminScopeRequest();
         req.setUserid("manager8587");
-        OapiUserGetAdminScopeResponse response=null;
+        OapiUserGetAdminScopeResponse response = null;
         try {
-             response = client.execute(req, ResultRespose.getToken());
+            response = client.execute(req, ResultRespose.getToken());
         } catch (ApiException e) {
             e.printStackTrace();
         }
@@ -153,9 +159,10 @@ public class UserBiz {
 
     /**
      * 根据unionid获取userid
+     *
      * @return
      */
-    public  ObjectRestResponse getUserGetUseridByUnionid(){
+    public ObjectRestResponse getUserGetUseridByUnionid() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/getUseridByUnionid");
         OapiUserGetUseridByUnionidRequest request = new OapiUserGetUseridByUnionidRequest();
         request.setUnionid("M9Ar4MVQA4vk4iPRwIJdTXAiEiE");
@@ -172,9 +179,10 @@ public class UserBiz {
 
     /**
      * 创建用户
+     *
      * @return
      */
-    public  ObjectRestResponse CreateUser(){
+    public ObjectRestResponse CreateUser() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/create");
         OapiUserCreateRequest request = new OapiUserCreateRequest();
         request.setUserid("32145");
@@ -194,14 +202,18 @@ public class UserBiz {
         } catch (ApiException e) {
             e.printStackTrace();
         }
+        if ("60102".equals(response.getCode())) {
+//            return ObjectRestResponse.genJsonResultByOk(response.getErrcode(), response.getErrmsg())
+        }
         return ObjectRestResponse.genJsonResultByOk(response);
     }
 
     /**
-     *  更新用户
+     * 更新用户
+     *
      * @return
      */
-    public  ObjectRestResponse UpdateUser(){
+    public ObjectRestResponse UpdateUser() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/update");
         OapiUserUpdateRequest request = new OapiUserUpdateRequest();
         request.setUserid("32145");
@@ -219,9 +231,10 @@ public class UserBiz {
 
     /**
      * 删除用户
+     *
      * @return
      */
-    public  ObjectRestResponse DeleteUser(){
+    public ObjectRestResponse DeleteUser() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/delete");
         OapiUserDeleteRequest request = new OapiUserDeleteRequest();
         request.setUserid("32145");
