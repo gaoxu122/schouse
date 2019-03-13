@@ -12,9 +12,9 @@ import com.example.sc.baseResource.ITStaticConstant;
 import com.example.sc.baseResource.NailInterfaceAddress;
 import com.example.sc.until.ding.ITAccessToken;
 import com.taobao.api.ApiException;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
-@Log4j
+@Log4j2
 public class ResultRespose {
 
 
@@ -29,8 +29,11 @@ public class ResultRespose {
         return response;
     }
 
+    /**
+     * 获得token
+     * @return
+     */
     public static String getToken() {
-
         String result = null;
         DefaultDingTalkClient client = new DefaultDingTalkClient(NailInterfaceAddress.TOKEN_ADDRESS);
         OapiGettokenRequest request = new OapiGettokenRequest();
@@ -40,9 +43,9 @@ public class ResultRespose {
         try {
             OapiGettokenResponse response = client.execute(request);
             result = response.getAccessToken();
-            System.out.println("token请求结果==> " + result);
+            log.info("token请求结果==========>"+result);
         } catch (ApiException e) {
-            e.printStackTrace();
+            log.error("抛出的异常为:"+e.getMessage());
         }
         return result;
     }

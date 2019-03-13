@@ -60,6 +60,19 @@ public class ObjectRestResponse<T> extends BaseResponse {
     }
 
     /**
+     *
+     * @param status
+     * @param msg
+     * @return
+     */
+    public static ObjectRestResponse genJsonResultByOk(Long status,String msg) {
+        ObjectRestResponse objectRestResponse = new ObjectRestResponse();
+        objectRestResponse.setLongStatus(status);
+        objectRestResponse.setMessage(msg);
+        return objectRestResponse;
+    }
+
+    /**
      * 返回成功数据
      * @param status
      * @param msg

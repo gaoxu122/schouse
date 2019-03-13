@@ -9,6 +9,7 @@ import com.dingtalk.api.response.*;
 import com.example.sc.baseResource.NailInterfaceAddress;
 import com.example.sc.common.msg.ObjectRestResponse;
 import com.example.sc.until.ding.constant.ResultRespose;
+import com.example.sc.until.ding.msg.ErrorMsg;
 import com.taobao.api.ApiException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -202,10 +203,11 @@ public class UserBiz {
         } catch (ApiException e) {
             e.printStackTrace();
         }
-        if ("60102".equals(response.getCode())) {
-//            return ObjectRestResponse.genJsonResultByOk(response.getErrcode(), response.getErrmsg())
+        if ((ErrorMsg.REPEAT_USER_CODE.longValue()) == response.getErrcode()) {
+            return ObjectRestResponse.genJsonResultByOk(response.getErrcode(), response.getErrmsg());
         }
         return ObjectRestResponse.genJsonResultByOk(response);
+
     }
 
     /**

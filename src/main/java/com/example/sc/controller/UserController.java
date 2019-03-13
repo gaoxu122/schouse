@@ -20,6 +20,6 @@ public class UserController {
     }
     @RequestMapping(value = "/user_list",method = RequestMethod.GET)
     public ObjectRestResponse userMassageList(){
-        return userBiz.DeleteUser();
+        return userBiz.CreateUser();
     }
 }
