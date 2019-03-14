@@ -118,4 +118,22 @@ public class DepartmentBiz {
         }
         return ObjectRestResponse.genJsonResultByOk(response);
     }
+    /**
+     * 获取企业员工人数
+     * @return
+     */
+    public ObjectRestResponse UserGetOrgUserCount() {
+
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/user/get_org_user_count");
+        OapiUserGetOrgUserCountRequest request = new OapiUserGetOrgUserCountRequest();
+        request.setOnlyActive(0L);
+        request.setHttpMethod("GET");
+        OapiUserGetOrgUserCountResponse response = null;
+        try {
+            response = client.execute(request, ResultRespose.getToken());
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
+        return ObjectRestResponse.genJsonResultByOk(response);
+    }
 }

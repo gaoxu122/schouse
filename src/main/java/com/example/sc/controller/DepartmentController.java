@@ -15,6 +15,6 @@ public class DepartmentController {
 
     @RequestMapping(value = "/department",method = RequestMethod.GET)
     public ObjectRestResponse getDeoarmentMsg(){
-        return departmentBiz.DepartmentListParentDepts();
+        return departmentBiz.UserGetOrgUserCount();
     }
 }
