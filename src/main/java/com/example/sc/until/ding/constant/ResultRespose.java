@@ -25,13 +25,14 @@ public class ResultRespose {
         try {
             response = client.execute(request, ResultRespose.getToken());
         } catch (ApiException e) {
-            log.error("ApiException"+e.getMessage());
+            log.error("ApiException" + e.getMessage());
         }
         return response;
     }
 
     /**
      * 获得token
+     *
      * @return
      */
     public static String getToken() {
@@ -44,9 +45,9 @@ public class ResultRespose {
         try {
             OapiGettokenResponse response = client.execute(request);
             result = response.getAccessToken();
-            log.info("token请求结果==========>"+result);
+            log.info("token请求结果==========>" + result);
         } catch (ApiException e) {
-            log.error("抛出的异常为:"+e.getMessage());
+            log.error("抛出的异常为:" + e.getMessage());
         }
         return result;
     }

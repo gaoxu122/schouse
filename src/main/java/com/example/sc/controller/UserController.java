@@ -14,12 +14,23 @@ public class UserController {
     @Autowired
     UserBiz userBiz;
 
-    @RequestMapping(value = "/user",method = RequestMethod.GET)
-    public ObjectRestResponse userMassage(){
+    /**
+     * 获得人员的所有信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public ObjectRestResponse userMassage() {
         return userBiz.getUserMassage();
     }
-    @RequestMapping(value = "/user_list",method = RequestMethod.GET)
-    public ObjectRestResponse userMassageList(){
+
+    /**
+     * 创建用户
+     *
+     * @return
+     */
+    @RequestMapping(value = "/user_list", method = RequestMethod.GET)
+    public ObjectRestResponse userMassageList() {
         return userBiz.CreateUser();
     }
 }

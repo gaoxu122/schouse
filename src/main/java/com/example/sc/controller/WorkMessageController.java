@@ -15,10 +15,15 @@ public class WorkMessageController {
     @Autowired
     WorkMessageBiz workMessageBiz;
 
+    /**
+     * 发送工作信息
+     *
+     * @return
+     */
     @RequestMapping(value = "/work", method = RequestMethod.GET)
     public ObjectRestResponse getWorkMessage() {
 
-        return workMessageBiz.sendMessageCorpconversation();
+        return workMessageBiz.getSendChat();
 
     }
 }

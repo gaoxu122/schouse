@@ -14,17 +14,18 @@ public class RoleController {
     @Autowired
     RoleBiz roleBiz;
 
-    @RequestMapping(value = "/role_list",method = RequestMethod.GET)
-    public ObjectRestResponse getRole(){
+    @RequestMapping(value = "/role_list", method = RequestMethod.GET)
+    public ObjectRestResponse getRole() {
         return roleBiz.getRoleList();
     }
 
     /**
      * 获得该角色下的所有员工信息
+     *
      * @return
      */
-    @RequestMapping(value = "/role_simple_list",method = RequestMethod.GET)
-    public ObjectRestResponse getUserForRoleLists(){
+    @RequestMapping(value = "/role_simple_list", method = RequestMethod.GET)
+    public ObjectRestResponse getUserForRoleLists() {
         return roleBiz.RoleGetrole();
     }
 

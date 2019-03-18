@@ -118,8 +118,10 @@ public class DepartmentBiz {
         }
         return ObjectRestResponse.genJsonResultByOk(response);
     }
+
     /**
      * 获取企业员工人数
+     *
      * @return
      */
     public ObjectRestResponse UserGetOrgUserCount() {

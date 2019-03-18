@@ -5,12 +5,11 @@ import com.example.sc.common.vo.TableData;
 
 
 /**
- *ObjectRestResponse
+ * ObjectRestResponse
  *
- *@description
- *
- *@author jianghx
- *@create 2018/8/23 16:16
+ * @author jianghx
+ * @description
+ * @create 2018/8/23 16:16
  **/
 public class ObjectRestResponse<T> extends BaseResponse {
 
@@ -20,6 +19,7 @@ public class ObjectRestResponse<T> extends BaseResponse {
 
     /**
      * 返回成功数据
+     *
      * @return
      */
     public static ObjectRestResponse genJsonResultByOk() {
@@ -48,11 +48,12 @@ public class ObjectRestResponse<T> extends BaseResponse {
 
     /**
      * 返回成功数据
+     *
      * @param status
      * @param msg
      * @return
      */
-    public static ObjectRestResponse genJsonResultByOk(int status,String msg) {
+    public static ObjectRestResponse genJsonResultByOk(int status, String msg) {
         ObjectRestResponse objectRestResponse = new ObjectRestResponse();
         objectRestResponse.setStatus(status);
         objectRestResponse.setMessage(msg);
@@ -60,12 +61,11 @@ public class ObjectRestResponse<T> extends BaseResponse {
     }
 
     /**
-     *
      * @param status
      * @param msg
      * @return
      */
-    public static ObjectRestResponse genJsonResultByOk(Long status,String msg) {
+    public static ObjectRestResponse genJsonResultByOk(Long status, String msg) {
         ObjectRestResponse objectRestResponse = new ObjectRestResponse();
         objectRestResponse.setLongStatus(status);
         objectRestResponse.setMessage(msg);
@@ -74,12 +74,13 @@ public class ObjectRestResponse<T> extends BaseResponse {
 
     /**
      * 返回成功数据
+     *
      * @param status
      * @param msg
      * @param data
      * @return
      */
-    public static ObjectRestResponse genJsonResultByOk(int status,String msg,Object data) {
+    public static ObjectRestResponse genJsonResultByOk(int status, String msg, Object data) {
         ObjectRestResponse objectRestResponse = new ObjectRestResponse();
         objectRestResponse.setStatus(status);
         objectRestResponse.setMessage(msg);
@@ -90,23 +91,23 @@ public class ObjectRestResponse<T> extends BaseResponse {
 
     /**
      * 返回列表类型数据
+     *
      * @param total
      * @param data
      * @return
      */
-    public static ObjectRestResponse genTableResult(long total,Object data) {
+    public static ObjectRestResponse genTableResult(long total, Object data) {
         ReturnCode codeOk = ReturnCode.CODE_OK;
         ObjectRestResponse objectRestResponse = new ObjectRestResponse();
         objectRestResponse.setStatus(codeOk.getCode());
         objectRestResponse.setMessage(codeOk.getMsg());
-        TableData tableData = new  TableData(total, data);
+        TableData tableData = new TableData(total, data);
         objectRestResponse.setData(new TableData(total, data));
         return objectRestResponse;
     }
 
 
     /**
-     *
      * @param rel
      * @return
      */
@@ -120,12 +121,11 @@ public class ObjectRestResponse<T> extends BaseResponse {
     }
 
     /**
-     *
      * @param rel
      * @param data
      * @return
      */
-    public static ObjectRestResponse genJsonResultOfRelAndData(boolean rel,Object data) {
+    public static ObjectRestResponse genJsonResultOfRelAndData(boolean rel, Object data) {
         ReturnCode codeOk = ReturnCode.CODE_OK;
         ObjectRestResponse objectRestResponse = new ObjectRestResponse();
         objectRestResponse.setStatus(codeOk.getCode());
@@ -150,7 +150,6 @@ public class ObjectRestResponse<T> extends BaseResponse {
     public void setData(T data) {
         this.data = data;
     }
-
 
 
 }

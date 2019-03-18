@@ -3,18 +3,31 @@ package com.example.sc.biz.work;
 
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
+import com.dingtalk.api.request.OapiChatCreateRequest;
+import com.dingtalk.api.request.OapiChatSendRequest;
 import com.dingtalk.api.request.OapiMessageCorpconversationAsyncsendV2Request;
+import com.dingtalk.api.request.OapiMessageCorpconversationGetsendresultRequest;
+import com.dingtalk.api.response.OapiChatCreateResponse;
+import com.dingtalk.api.response.OapiChatSendResponse;
 import com.dingtalk.api.response.OapiMessageCorpconversationAsyncsendV2Response;
+import com.dingtalk.api.response.OapiMessageCorpconversationGetsendresultResponse;
 import com.example.sc.common.msg.ObjectRestResponse;
 import com.example.sc.until.ding.constant.ResultRespose;
 import com.taobao.api.ApiException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 @Log4j2
 public class WorkMessageBiz {
 
+    /**
+     * 发送工作消息
+     *
+     * @return
+     */
     public ObjectRestResponse sendMessageCorpconversation() {
         DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/message/corpconversation/asyncsend_v2");
 
@@ -73,9 +86,9 @@ public class WorkMessageBiz {
         msg.setMsgtype("action_card");
         request.setMsg(msg);
 
-        OapiMessageCorpconversationAsyncsendV2Response response=null;
+        OapiMessageCorpconversationAsyncsendV2Response response = null;
         try {
-             response = client.execute(request, ResultRespose.getToken());
+            response = client.execute(request, ResultRespose.getToken());
         } catch (ApiException e) {
             log.error("Class: " + this.getClass().getName() +
                     " method: " + Thread.currentThread().getStackTrace()[1].getMethodName() +
@@ -85,4 +98,92 @@ public class WorkMessageBiz {
 
         return ObjectRestResponse.genJsonResultByOk(response);
     }
+
+    /**
+     * 查询工作通知消息的发送结果
+     *
+     * @return
+     */
+    public ObjectRestResponse getSendResultMessageCorpconversation() {
+
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/topapi/message/corpconversation/getsendresult");
+        OapiMessageCorpconversationGetsendresultRequest request = new OapiMessageCorpconversationGetsendresultRequest();
+        // agent_id  :  微应用的agentid
+        request.setAgentId(135717601L);
+        // task_id	:	异步任务的id
+        request.setTaskId(9326688016L);
+        OapiMessageCorpconversationGetsendresultResponse response = null;
+        try {
+            response = client.execute(request, ResultRespose.getToken());
+        } catch (ApiException e) {
+            log.error("Class: " + this.getClass().getName() +
+                    " method: " + Thread.currentThread().getStackTrace()[1].getMethodName() +
+                    " line:" + Thread.currentThread().getStackTrace()[1].getLineNumber() +
+                    " Error:" + e.getMessage());
+        }
+
+        return ObjectRestResponse.genJsonResultByOk(response);
+    }
+
+    /**
+     * 发送群消息
+     *
+     * @return
+     */
+    public ObjectRestResponse getSendChat() {
+
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/chat/send");
+
+        OapiChatSendRequest request = new OapiChatSendRequest();
+
+        // 群会话的id，可以在调用创建群会话接口的返回结果里面获取，也可以通过dd.chooseChat获取
+        request.setChatid("chate27b5326f06678a6386db113eed33dba");
+        OapiChatSendRequest.Msg msg = new OapiChatSendRequest.Msg();
+        msg.setMsgtype("text");
+        OapiChatSendRequest.Text text = new OapiChatSendRequest.Text();
+        text.setContent("大家好这个只是测试一下");
+        msg.setText(text);
+
+        request.setMsg(msg);
+        OapiChatSendResponse response = null;
+        try {
+            response = client.execute(request, ResultRespose.getToken());
+        } catch (ApiException e) {
+            log.error("Class: " + this.getClass().getName() +
+                    " method: " + Thread.currentThread().getStackTrace()[1].getMethodName() +
+                    " line:" + Thread.currentThread().getStackTrace()[1].getLineNumber() +
+                    " Error:" + e.getMessage());
+        }
+
+        return ObjectRestResponse.genJsonResultByOk(response);
+    }
+
+    /**
+     * 创建会话
+     *
+     * @return
+     */
+    public ObjectRestResponse createChat() {
+
+        DingTalkClient client = new DefaultDingTalkClient("https://oapi.dingtalk.com/chat/create");
+        OapiChatCreateRequest request = new OapiChatCreateRequest();
+        request.setName("行路者");
+        request.setOwner("manager8587");
+        String[] userLists = new String[]{"1727413761653578", "2245483800-2056871264", "32145", "183434085420286867", "116017633029579", "1415051140937204"};
+        request.setUseridlist(Arrays.asList(userLists));
+        request.setShowHistoryType(1L);
+        OapiChatCreateResponse response = null;
+        try {
+            response = client.execute(request, ResultRespose.getToken());
+        } catch (ApiException e) {
+            log.error("Class: " + this.getClass().getName() +
+                    " method: " + Thread.currentThread().getStackTrace()[1].getMethodName() +
+                    " line:" + Thread.currentThread().getStackTrace()[1].getLineNumber() +
+                    " Error:" + e.getMessage());
+        }
+
+        return ObjectRestResponse.genJsonResultByOk(response);
+    }
+
+
 }
